@@ -17,6 +17,7 @@
         "lib": ["ESNext", "DOM", "DOM.Iterable"],
         "types": [],
         "paths": {
+            "~/*": ["src/*"],
             "@/*": ["src/*"],
             "assets/*": ["src/assets/*"]
         }
