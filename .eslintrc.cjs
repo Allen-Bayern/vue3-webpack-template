@@ -14,7 +14,6 @@ module.exports = {
         'eslint:recommended',
         '@vue/typescript/recommended',
         'plugin:prettier/recommended',
-        'prettier',
     ],
     parser: 'vue-eslint-parser',
     parserOptions: {
@@ -30,9 +29,9 @@ module.exports = {
     rules: {
         'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-        semi: ['error', 'always'],
-        quotes: ['error', 'single', { avoidEscape: true }],
-        indent: ['error', 4, { SwitchCase: 1 }],
+        // Formatting is owned by Prettier (see .prettierrc.yml) via prettier/prettier.
+        // Do NOT re-enable semi/quotes/indent here — eslint-config-prettier disables
+        // them on purpose; re-enabling would fight Prettier on every config change.
         'prettier/prettier': ['error', {}, { usePrettierrc: true }],
         'vue/multi-word-component-names': 'off',
 
@@ -95,11 +94,6 @@ module.exports = {
             parser: 'vue-eslint-parser',
             parserOptions: {
                 parser: '@typescript-eslint/parser',
-            },
-            rules: {
-                // Only turn off the generic indent rule so that Prettier's vueIndentScriptAndStyle: false takes effect
-                // The Vue-specific indent rules stay enabled to check the template section
-                indent: 'off',
             },
         },
     ],

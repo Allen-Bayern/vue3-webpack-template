@@ -19,8 +19,9 @@ module.exports = {
             '@babel/preset-env',
             {
                 // Inject polyfills on demand (target browsers are determined by the
-                // browserslist in package.json; polyfills come from core-js in
-                // dependencies, no manual import needed at the entry point)
+                // browserslist config at .browserslistrc in the project root;
+                // polyfills come from core-js in dependencies, no manual import
+                // needed at the entry point)
                 useBuiltIns: 'usage',
                 corejs: corejsVersion,
             },
@@ -33,7 +34,9 @@ module.exports = {
             '@babel/plugin-transform-runtime',
             {
                 // Only extract helpers (paired with @babel/runtime in dependencies);
-                // polyfills and regenerator are both injected by preset-env usage, not duplicated here
+                // corejs: false = do NOT pull polyfills from @babel/runtime-corejs3
+                // (not installed) — polyfills and regenerator are both injected by
+                // preset-env usage, not duplicated here
                 helpers: true,
                 regenerator: false,
                 corejs: false,

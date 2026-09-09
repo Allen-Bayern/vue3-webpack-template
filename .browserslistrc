@@ -1,11 +1,10 @@
 # Compatibility baseline: Chrome 49+ (unified baseline for desktop + mobile, incl. Android WebView / low-end Android devices)
-# Compatibility is guaranteed by this file's explicit lower bound + Babel transpilation + core-js polyfills, independent of the Node version on the build machine.
+# This file is consumed by @babel/preset-env (babel.config.js, useBuiltIns: 'usage' + core-js 3) to inject polyfills
+# on demand, and by autoprefixer to generate CSS vendor prefixes.
 # Note: do not use `not dead` — it would drop legacy WebView/Safari versions that are no longer updated from the target set.
 # Vue 3 relies on Proxy (not polyfillable), which is only supported from Chrome 49 onward, so the baseline must not go below 49.
 #
 # Semantics: `chrome >= 49` is a range match (matches all released Chrome versions >= 49).
-# @vitejs/plugin-legacy generates the legacy bundle (ES5 + core-js polyfills) based on the lowest common feature set
-# of these targets — the oldest version (49) determines the transpilation and polyfill set. Legacy devices run the
-# legacy bundle, while modern devices run the modern bundle built with Vite's default build.target
-# ('baseline-widely-available'); the two never interfere with each other.
+# There is no separate legacy bundle in this project (no @vitejs/plugin-legacy here) — a single bundle is emitted:
+# Babel transpiles syntax and injects the polyfills needed by the oldest target (Chrome 49).
 chrome >= 49
