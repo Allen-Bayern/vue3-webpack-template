@@ -1,0 +1,21 @@
+{
+    // Format automatically on save
+    "editor.formatOnSave": true,
+    // Use Prettier as the default formatter (requires the esbenp.prettier-vscode extension)
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    // Pin Prettier per language so other extensions can't take over formatting
+    "[vue]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[json]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[jsonc]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[css]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[scss]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[less]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[html]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[markdown]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    // Also run ESLint fixes on save (the prettier/prettier rule runs here too; both are compatible)
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    }
+}
