@@ -2,19 +2,19 @@ const { defineConfig } = require('@vue/cli-service');
 const path = require('path');
 
 /**
- * 导航到根目录路径
- * @param {string} [rootPath=''] - 相对根目录的子路径，默认为空字符串
- * @returns {string} 解析后的绝对路径
- * @description 根据当前文件所在目录构建指向项目根目录的相对路径
+ * Navigate to the project root path
+ * @param {string} [rootPath=''] - Sub-path relative to the root directory; defaults to an empty string
+ * @returns {string} The resolved absolute path
+ * @description Resolves an absolute path pointing to the project root based on the directory of this file
  */
 const toRoot = (rootPath = '') => {
     return path.resolve(__dirname, `./${rootPath}`);
 };
 
 /**
- * 获取 HtmlWebpackPlugin 的新配置
- * @param {Object} [defaultConfig={}] - 默认配置对象
- * @returns {Object} 更新后的 HtmlWebpackPlugin 配置
+ * Get the updated HtmlWebpackPlugin configuration
+ * @param {Object} [defaultConfig={}] - The default config object
+ * @returns {Object} The updated HtmlWebpackPlugin config
  */
 const getHtmlPluginConfig = (defaultConfig = {}) => {
     const { templateParameters: oldTemplateParams = {} } = defaultConfig || {};
@@ -31,16 +31,16 @@ const getHtmlPluginConfig = (defaultConfig = {}) => {
 };
 
 /**
- * 判断是否为生产环境
+ * Whether the current environment is production
  * @type {boolean}
- * @description 根据 NODE_ENV 环境变量判断是否为生产环境
+ * @description Determines whether the environment is production based on the NODE_ENV environment variable
  */
 const isProduction = /prod/i.test(process.env?.NODE_ENV ?? '');
 
 /**
- * 新版本的 babel-loader 路径
+ * Path to the newer babel-loader
  * @type {string}
- * @description 指向根目录下的 babel-loader 路径
+ * @description Points to the babel-loader under the project root
  */
 const newBabelLoader = toRoot('node_modules/babel-loader/lib/index.js');
 
@@ -62,13 +62,13 @@ module.exports = defineConfig(() => {
                 .clear()
                 .add(path.resolve(__dirname, 'src', 'main.ts'))
                 .end()
-                // 配置 .ts & .tsx 文件使用 babel-loader（@babel/preset-typescript）
+                // Make .ts & .tsx files use babel-loader (@babel/preset-typescript)
                 .module.rule('ts')
                 .test(/\.m?tsx?$/)
                 .use('babel-loader')
                 .loader(newBabelLoader)
                 .options({
-                    // 关键：显式指向根目录 babel 配置
+                    // Critical: explicitly point to the babel config in the project root
                     configFile: toRoot('babel.config.js'),
                 })
                 .end()
@@ -79,7 +79,7 @@ module.exports = defineConfig(() => {
                 .use('babel-loader')
                 .loader(newBabelLoader)
                 .options({
-                    // 关键：显式指向根目录 babel 配置
+                    // Critical: explicitly point to the babel config in the project root
                     configFile: toRoot('babel.config.js'),
                 })
                 .end()
@@ -109,8 +109,8 @@ module.exports = defineConfig(() => {
                         exportLocalsConvention(name) {
                             // home-view__text--red → homeView__text_red
                             const camel = name
-                                .replace(/--/g, '_') // 先把 -- 换成 _
-                                .replace(/-([a-z])/g, (_, char) => char.toUpperCase()); // 驼峰化 -
+                                .replace(/--/g, '_') // First replace -- with _
+                                .replace(/-([a-z])/g, (_, char) => char.toUpperCase()); // Camel-case -
                             return [name, camel];
                         },
                     },
