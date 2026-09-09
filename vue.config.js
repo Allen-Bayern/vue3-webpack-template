@@ -50,7 +50,7 @@ module.exports = defineConfig(() => {
             config
                 .entry('app')
                 .clear()
-                .add(path.resolve(__dirname, 'src', 'main.ts'))
+                .add(path.resolve(__dirname, 'src', 'main.tsx'))
                 .end()
                 // Make .ts & .tsx files use babel-loader (@babel/preset-typescript)
                 .module.rule('ts')
