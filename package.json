@@ -2,10 +2,6 @@
   "name": "webpack-basic",
   "version": "1.0.0",
   "description": "",
-  "browserslist": [
-    "> 1%",
-    "last 2 versions"
-  ],
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build"
