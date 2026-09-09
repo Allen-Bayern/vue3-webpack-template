@@ -26,8 +26,13 @@ module.exports = {
                 corejs: corejsVersion,
             },
         ],
-        // Handle .ts/.tsx (in vue.config.js the ts rule is handled by babel-loader, no ts-loader involved)
-        '@babel/preset-typescript',
+        // Handle .ts/.tsx (in vue.config.js the ts rule is handled by babel-loader, no ts-loader involved).
+        // allExtensions: true is required — the compiled <script lang="ts"> block of a .vue SFC is passed
+        // to babel with the original .vue filename (e.g. src/App.vue), and the default config only applies
+        // the TS transform to files whose extension matches .ts/.tsx/.mts/.cts, leaving type annotations
+        // like `(_ctx: any, _cache: any)` behind and breaking the parse. isTSX pairs with
+        // @vue/babel-plugin-jsx so JSX works in .tsx files.
+        ['@babel/preset-typescript', { allExtensions: true, isTSX: true }],
     ],
     plugins: [
         [

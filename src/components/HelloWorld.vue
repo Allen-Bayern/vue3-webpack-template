@@ -1,12 +1,18 @@
 <script lang="ts" setup>
-defineProps<{
+const props = defineProps<{
     msg: string;
     onClick?: () => void;
 }>();
+
+const handleClick = () => {
+    if (props.onClick) {
+        props.onClick();
+    }
+};
 </script>
 
 <template>
-    <h2 @click="onClick">
+    <h2 @click="handleClick">
         {{ msg }}
     </h2>
     <img src="~assets/logo.png" alt="HEROPY" />
