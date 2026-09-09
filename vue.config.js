@@ -9,10 +9,10 @@ const path = require('path');
 const getHtmlPluginConfig = (defaultConfig = {}) => {
     const { templateParameters: oldTemplateParams = {} } = defaultConfig || {};
     return {
-        ...defaultConfig,
+        ...(defaultConfig || {}),
         templateParameters: {
             ...oldTemplateParams,
-            lang: 'zh-Hans',
+            lang: 'en',
         },
         template: path.resolve(__dirname, 'index.html'),
         favicon: path.resolve(__dirname, 'static', 'favicon.ico'),
@@ -76,6 +76,8 @@ module.exports = defineConfig(() => {
                 .end()
                 .end()
                 .resolve.extensions.merge(['.ts', '.tsx', '.js', '.jsx', '.vue', '.json'])
+                .end()
+                .alias.set('~', path.resolve(__dirname, 'src'))
                 .end()
                 .alias.set('assets', path.resolve(__dirname, 'src/assets'))
                 .end()
