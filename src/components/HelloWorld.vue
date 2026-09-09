@@ -1,18 +1,16 @@
+<script lang="ts" setup>
+defineProps<{
+    msg: string;
+    onClick?: () => void;
+}>();
+</script>
+
 <template>
-    <h2 @click="$emit('click')">
+    <h2 @click="onClick">
         {{ msg }}
     </h2>
     <img src="~assets/logo.png" alt="HEROPY" />
 </template>
-
-<script>
-export default {
-    props: {
-        msg: { type: String },
-    },
-    emits: ['click'],
-};
-</script>
 
 <style scoped lang="scss">
 @import '~/scss/main';
