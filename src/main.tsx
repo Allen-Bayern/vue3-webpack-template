@@ -3,7 +3,7 @@ import { RouterView } from 'vue-router';
 import { createPinia } from 'pinia';
 import router from './router';
 
-// App-level plugin list: Pinia (state management) + Vue Router (routing)
+// App-level plugin list. New plugins can be appended here as the app grows.
 // Object.freeze prevents the array from being accidentally modified later
 const plugins = Object.freeze<Plugin[]>([createPinia(), router]);
 
