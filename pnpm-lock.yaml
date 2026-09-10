@@ -97,6 +97,9 @@ devDependencies:
   vue-eslint-parser:
     specifier: ^9.4.3
     version: 9.4.3(eslint@8.57.1)
+  vue-loader:
+    specifier: ^17.4.2
+    version: 17.4.2(@vue/compiler-sfc@3.5.42)(vue@3.5.42)(webpack@5.110.3)
 
 packages:
 
@@ -7510,7 +7513,7 @@ packages:
       hash-sum: 2.0.0
       vue: 3.5.42(typescript@5.3.3)
       watchpack: 2.5.2
-      webpack: 5.110.3(cssnano@5.1.15)(postcss@8.5.28)
+      webpack: 5.110.3(postcss@8.5.28)
     dev: true
 
   /vue-router@4.6.4(vue@3.5.42):
