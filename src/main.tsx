@@ -17,9 +17,19 @@ const _createAppInstance = () => {
     return appInstance;
 };
 
+// Resolve the DOM element to mount the app onto: prefer the #app node,
+// and fall back to <body> when it is missing (e.g. in tests or non-standard hosts)
+const _getMountElement = () => {
+    let res = document.getElementById('app');
+    if (!res) {
+        ({ body: res } = document);
+    }
+    return res;
+};
+
 // Mount the app instance onto the #app DOM node and return the mounted root component instance
 const _mountApp = <A extends VueApp = VueApp>(_appInst: A) => {
-    return _appInst.mount('#app');
+    return _appInst.mount(_getMountElement());
 };
 
 // Entry function: create the app instance first, then mount it to the page
