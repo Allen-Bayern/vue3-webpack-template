@@ -19,11 +19,11 @@ const handleClick = () => {
 </template>
 
 <style scoped lang="scss">
-@import '~/scss/main';
+@use '~/scss/main' as main;
 
 h2 {
     font-size: 22px;
-    color: $color--primary;
+    color: main.$color--primary;
     & + img {
         width: 120px;
     }
