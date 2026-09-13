@@ -69,7 +69,6 @@ module.exports = {
         'no-useless-concat': 'error',
         'no-useless-return': 'error',
         'require-await': 'error',
-        'wrap-iife': ['error', 'inside'],
         yoda: ['error', 'never'],
     },
     overrides: [
