@@ -14,7 +14,7 @@ const getHtmlPluginConfig = (defaultConfig = {}) => {
             ...oldTemplateParams,
             lang: 'en',
         },
-        template: path.resolve(__dirname, 'index.html'),
+        template: path.resolve(__dirname, 'index.htm'),
         favicon: path.resolve(__dirname, 'static', 'favicon.ico'),
         title: 'example app',
     };
