@@ -113,7 +113,7 @@ module.exports = defineConfig(() => {
                 .plugin('html')
                 .tap(args => {
                     const [defaultConf, ...rest] = args;
-                    return [getHtmlPluginConfig(defaultConf), ...rest];
+                    return [getHtmlPluginConfig(defaultConf), ...rest].filter(Boolean);
                 })
                 .end();
         },
