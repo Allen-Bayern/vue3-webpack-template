@@ -5,10 +5,16 @@ const router = createRouter({
     routes: [
         {
             path: '/',
-            name: 'home',
-            component() {
-                return import(/* webpackChunkName: "HomeView" */ '../views/HomeView.vue');
-            },
+            redirect: '/home',
+            children: [
+                {
+                    path: 'home',
+                    name: 'HomeView',
+                    component() {
+                        return import(/* webpackChunkName: "HomeView" */ '../views/HomeView.vue');
+                    },
+                },
+            ],
         },
     ],
 });
