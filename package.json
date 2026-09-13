@@ -1,14 +1,14 @@
 {
-    "name": "webpack-basic",
+    "name": "vue3-webpack-template",
     "version": "1.0.0",
-    "description": "",
+    "description": "A Vue 3 + TypeScript project template built with Vue CLI (webpack), featuring Vue Router, Pinia, JSX support, Sass, ESLint + Prettier, and an ES5-compatible production build.",
     "scripts": {
         "dev": "vue-cli-service serve",
         "build": "vue-cli-service build --no-module"
     },
     "keywords": [],
     "author": "",
-    "license": "ISC",
+    "license": "MIT",
     "devDependencies": {
         "@babel/core": "^7.29.7",
         "@babel/plugin-transform-runtime": "^7.29.7",
