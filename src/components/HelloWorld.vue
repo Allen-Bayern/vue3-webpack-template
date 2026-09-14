@@ -19,7 +19,7 @@ const handleClick = () => {
 </template>
 
 <style scoped lang="scss">
-@use '~/scss/main' as main;
+@use 'assets/main' as main;
 
 h2 {
     font-size: 22px;
