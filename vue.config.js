@@ -135,6 +135,15 @@ module.exports = defineConfig(() => {
                         },
                     },
                 },
+                // sass-loader@13 compiles through Dart Sass's legacy JS API, which is
+                // deprecated and removed in Dart Sass 2.0.0. Silence the warning here
+                // until sass-loader >= 14.2 (first version whose modern API importer
+                // resolves aliases like `assets/main`) can be adopted.
+                sass: {
+                    sassOptions: {
+                        silenceDeprecations: ['legacy-js-api'],
+                    },
+                },
             },
         },
     };

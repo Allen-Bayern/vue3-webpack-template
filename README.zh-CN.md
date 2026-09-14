@@ -8,9 +8,9 @@
 
 - **Vue 3 + TypeScript** —— `<script setup>` Composition API；入口是一个直接渲染 `<RouterView />` 的 JSX 根组件（没有 `App.vue`）
 - **Vue Router + Pinia** —— hash 路由 + 路由级懒加载，Pinia 预装
-- **Babel 编译 TypeScript** —— `.ts` / `.tsx` 由 `@babel/preset-typescript` + `babel-loader` 编译，无需 `ts-loader`；类型错误由 IDE / `vue-tsc` 检查，构建时不做类型检查
+- **Babel 编译 TypeScript** —— `.ts` / `.tsx` 由 `@babel/preset-typescript` + `babel-loader` 编译，无需 `ts-loader`；类型错误由 IDE 的 Vue 语言服务提示，构建时不做类型检查（未内置 `vue-tsc` / typecheck 脚本）
 - **JSX / TSX** —— 通过 `@vue/babel-plugin-jsx` 支持
-- **Sass / SCSS** —— 开箱即用，公共变量位于 `src/scss/main.scss`（`$color--primary` 等）
+- **Sass / SCSS** —— 开箱即用，公共变量位于 `src/assets/_main.scss`（`$color--primary` 等），入口另导入了一份 CSS reset（`src/assets/reset.css`）
 - **CSS Modules** —— 对 `*.module.css` / `*.module.scss` 自动启用，类名格式为 `[local]__[hash:base64]`，同时导出 camelCase 与原命名
 - **ES5 语法基线** —— `.browserslistrc` 以 `ie 11` 为目标，Babel 与 webpack 运行时只输出 ES5 语法；core-js 按需注入 polyfill（`useBuiltIns: 'usage'`），`pnpm build` 使用 `--no-module`（仅产出传统版本）
 - **ESLint + Prettier** —— 预配置完成；开发服务器保存即 lint（`lintOnSave: 'error'`），VS Code 中 Prettier 保存即格式化
@@ -48,15 +48,14 @@ pnpm dev
 ## 项目结构
 
 ```text
-├── index.html              # HTML 模板（lang、title 与 favicon 由 vue.config.js 注入）
+├── index.htm               # HTML 模板（lang、title 与 favicon 由 vue.config.js 注入）
 ├── static/                 # 原样拷贝到 dist/（favicon.ico）
 ├── src/
 │   ├── main.tsx            # 入口：安装 Pinia + Router，挂载 <RouterView />
 │   ├── router/             # vue-router（hash 路由，懒加载）
 │   ├── views/              # 路由级组件（HomeView.vue）
 │   ├── components/         # 可复用组件（HelloWorld.vue）
-│   ├── assets/             # 参与打包的资源（logo.png；别名：assets/）
-│   └── scss/               # 公共 SCSS 变量与混入（main.scss）
+│   └── assets/             # 参与打包的资源与样式（logo.png、reset.css、_main.scss；别名：assets/）
 ├── types/                  # 环境声明（.vue、*.module.*、图片等）
 ├── babel.config.js         # Babel 配置（TS/JSX、按需 polyfill、运行时辅助函数）
 ├── vue.config.js           # Vue CLI / webpack 配置（入口、loader、别名、CSS Modules、HTML）
@@ -64,8 +63,12 @@ pnpm dev
 ├── .browserslistrc         # 目标浏览器（ie 11 → ES5 语法基线）
 ├── .postcssrc.js           # PostCSS（autoprefixer）
 ├── .eslintrc.cjs           # ESLint 配置
+├── .eslintignore           # ESLint 忽略规则
 ├── .prettierrc.yml         # Prettier 配置
-└── .editorconfig           # 编辑器风格
+├── .editorconfig           # 编辑器风格
+├── .node-version           # Node 版本（16）
+├── .vscode/settings.json   # 保存时格式化 / lint（Prettier + ESLint）
+└── license                 # MIT 许可证
 ```
 
 ## 自定义

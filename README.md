@@ -8,9 +8,9 @@ A minimal, modern **Vue 3 + TypeScript** template powered by **Vue CLI (webpack)
 
 - **Vue 3 + TypeScript** — `<script setup>` Composition API; the entry is a JSX root that renders `<RouterView />` directly (no `App.vue`)
 - **Vue Router + Pinia** — hash-history routing with lazy-loaded views, Pinia pre-installed
-- **TypeScript via Babel** — `.ts` / `.tsx` compiled by `@babel/preset-typescript` + `babel-loader`, no `ts-loader`; type errors are caught by the IDE / `vue-tsc`, not at build time
+- **TypeScript via Babel** — `.ts` / `.tsx` compiled by `@babel/preset-typescript` + `babel-loader`, no `ts-loader`; type errors are surfaced by the IDE's Vue language service, not at build time (no `vue-tsc` / type-check script is bundled)
 - **JSX / TSX** — supported through `@vue/babel-plugin-jsx`
-- **Sass / SCSS** — ready out of the box, with shared variables in `src/scss/main.scss` (`$color--primary`, …)
+- **Sass / SCSS** — ready out of the box, with shared variables in `src/assets/_main.scss` (`$color--primary`, …) and a CSS reset (`src/assets/reset.css`) imported by the entry
 - **CSS Modules** — auto-enabled for `*.module.css` / `*.module.scss`, custom `[local]__[hash:base64]` class names, camelCase exports alongside the original names
 - **ES5 syntax floor** — `.browserslistrc` targets `ie 11`, so Babel and the webpack runtime emit ES5-only syntax; core-js polyfills are injected on demand (`useBuiltIns: 'usage'`), and `pnpm build` runs with `--no-module` (legacy output only)
 - **ESLint + Prettier** — preconfigured; the dev server lints on save (`lintOnSave: 'error'`), Prettier formats on save in VS Code
@@ -48,15 +48,14 @@ Then open <http://localhost:2000> and start building.
 ## Project Structure
 
 ```text
-├── index.html              # HTML template (lang, title & favicon injected via vue.config.js)
+├── index.htm               # HTML template (lang, title & favicon injected via vue.config.js)
 ├── static/                 # Copied as-is to dist/ (favicon.ico)
 ├── src/
 │   ├── main.tsx            # Entry: installs Pinia + Router, mounts <RouterView />
 │   ├── router/             # vue-router (hash history, lazy routes)
 │   ├── views/              # Route-level components (HomeView.vue)
 │   ├── components/         # Reusable components (HelloWorld.vue)
-│   ├── assets/             # Bundled assets (logo.png; alias: assets/)
-│   └── scss/               # Shared SCSS variables & mixins (main.scss)
+│   └── assets/             # Bundled assets & styles (logo.png, reset.css, _main.scss; alias: assets/)
 ├── types/                  # Ambient declarations (.vue, *.module.*, images, …)
 ├── babel.config.js         # Babel: TS/JSX, on-demand polyfills, runtime helpers
 ├── vue.config.js           # Vue CLI / webpack: entry, loaders, aliases, CSS Modules, HTML
@@ -64,8 +63,12 @@ Then open <http://localhost:2000> and start building.
 ├── .browserslistrc         # Browser targets (ie 11 → ES5 syntax floor)
 ├── .postcssrc.js           # PostCSS (autoprefixer)
 ├── .eslintrc.cjs           # ESLint config
+├── .eslintignore           # ESLint ignore patterns
 ├── .prettierrc.yml         # Prettier config
-└── .editorconfig           # Editor style
+├── .editorconfig           # Editor style
+├── .node-version           # Node version pin (16)
+├── .vscode/settings.json   # Format & lint on save (Prettier + ESLint)
+└── license                 # MIT license
 ```
 
 ## Customization

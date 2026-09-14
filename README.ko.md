@@ -8,9 +8,9 @@
 
 - **Vue 3 + TypeScript** — `<script setup>` Composition API; 엔트리는 `<RouterView />`를 직접 렌더링하는 JSX 루트 컴포넌트(`App.vue` 없음)
 - **Vue Router + Pinia** — 해시 히스토리 라우팅과 라우트 단위 lazy loading, Pinia 기본 설치
-- **Babel 기반 TypeScript** — `.ts` / `.tsx`를 `ts-loader` 없이 `@babel/preset-typescript` + `babel-loader`로 컴파일; 타입 오류는 빌드가 아닌 IDE / `vue-tsc`에서 확인
+- **Babel 기반 TypeScript** — `.ts` / `.tsx`를 `ts-loader` 없이 `@babel/preset-typescript` + `babel-loader`로 컴파일; 타입 오류는 빌드가 아니라 IDE의 Vue 언어 서비스에서 표시됩니다(`vue-tsc` / 타입 체크 스크립트는 포함되어 있지 않음)
 - **JSX / TSX** — `@vue/babel-plugin-jsx`로 지원
-- **Sass / SCSS** — 별도 설정 없이 바로 사용 가능, 공용 변수는 `src/scss/main.scss`(`$color--primary` 등)
+- **Sass / SCSS** — 별도 설정 없이 바로 사용 가능, 공용 변수는 `src/assets/_main.scss`(`$color--primary` 등)에 있고 CSS reset(`src/assets/reset.css`)을 엔트리에서 불러옵니다
 - **CSS Modules** — `*.module.css` / `*.module.scss` 파일에 자동 적용, 클래스명은 `[local]__[hash:base64]`, 원래 이름과 함께 camelCase도 내보냄
 - **ES5 문법 기준** — `.browserslistrc`가 `ie 11`을 타겟으로 하여 Babel과 webpack 런타임이 ES5 전용 문법만 출력; core-js 폴리필을 온디맨드로 주입(`useBuiltIns: 'usage'`), `pnpm build`는 `--no-module`(레거시 출력만)로 실행
 - **ESLint + Prettier** — 사전 구성 완료; 개발 서버에서 저장 시 린트 실행(`lintOnSave: 'error'`), VS Code에서 저장 시 Prettier 포맷팅
@@ -48,15 +48,14 @@ pnpm dev
 ## 프로젝트 구조
 
 ```text
-├── index.html              # HTML 템플릿(lang, title, favicon은 vue.config.js에서 주입)
+├── index.htm               # HTML 템플릿(lang, title, favicon은 vue.config.js에서 주입)
 ├── static/                 # dist/에 그대로 복사됨(favicon.ico)
 ├── src/
 │   ├── main.tsx            # 엔트리: Pinia + Router 설치, <RouterView /> 마운트
 │   ├── router/             # vue-router(해시 히스토리, lazy routes)
 │   ├── views/              # 라우트 단위 컴포넌트(HomeView.vue)
 │   ├── components/         # 재사용 컴포넌트(HelloWorld.vue)
-│   ├── assets/             # 번들링되는 리소스(logo.png; 별칭: assets/)
-│   └── scss/               # 공용 SCSS 변수와 믹스인(main.scss)
+│   └── assets/             # 번들링되는 리소스와 스타일(logo.png, reset.css, _main.scss; 별칭: assets/)
 ├── types/                  # 환경(ambient) 선언(.vue, *.module.*, 이미지 등)
 ├── babel.config.js         # Babel 설정(TS/JSX, 온디맨드 polyfill, 런타임 헬퍼)
 ├── vue.config.js           # Vue CLI / webpack 설정(엔트리, 로더, 별칭, CSS Modules, HTML)
@@ -64,8 +63,12 @@ pnpm dev
 ├── .browserslistrc         # 대상 브라우저(ie 11 → ES5 문법 기준)
 ├── .postcssrc.js           # PostCSS(autoprefixer)
 ├── .eslintrc.cjs           # ESLint 설정
+├── .eslintignore           # ESLint 무시 패턴
 ├── .prettierrc.yml         # Prettier 설정
-└── .editorconfig           # 에디터 스타일
+├── .editorconfig           # 에디터 스타일
+├── .node-version           # Node 버전(16)
+├── .vscode/settings.json   # 저장 시 포맷 / lint(Prettier + ESLint)
+└── license                 # MIT 라이선스
 ```
 
 ## 커스터마이징
