@@ -82,6 +82,9 @@ devDependencies:
   postcss:
     specifier: ^8.5.28
     version: 8.5.28
+  postcss-calc:
+    specifier: ^11.1.2
+    version: 11.1.2(postcss@8.5.28)
   prettier:
     specifier: ^3.9.6
     version: 3.9.6
@@ -1295,6 +1298,11 @@ packages:
     dependencies:
       '@babel/helper-string-parser': 7.29.7
       '@babel/helper-validator-identifier': 7.29.7
+
+  /@csstools/css-tokenizer@4.0.0:
+    resolution: {integrity: sha512-QxULHAm7cNu72w97JUNCBFODFaXpbDg+dP8b/oWFAZ2MTRppA3U00Y2L1HqaS4J6yBqxwa/Y3nMBaxVKbB/NsA==}
+    engines: {node: '>=20.19.0'}
+    dev: true
 
   /@discoveryjs/json-ext@0.5.7:
     resolution: {integrity: sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==}
@@ -6043,6 +6051,16 @@ packages:
       debug: 4.4.3
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /postcss-calc@11.1.2(postcss@8.5.28):
+    resolution: {integrity: sha512-VYTKcDyI+zrgd9xogzUf96ei8RZqwPP06KxZiE96HMEOx/jNqcKXheCZbZcXiEMxZ1UzY7/dUFPyCHLu/fUBEA==}
+    engines: {node: ^22.22.3 || ^24.15 || >=26.0}
+    peerDependencies:
+      postcss: ^8.5.28
+    dependencies:
+      '@csstools/css-tokenizer': 4.0.0
+      postcss: 8.5.28
     dev: true
 
   /postcss-calc@8.2.4(postcss@8.5.28):
